@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Jio Incentive Calculator&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      background-color: #f2f2f2;
+    }
+    h2 { color: #d9272e; }
+    label { display: block; margin: 10px 0 5px; }
+    input[type=&quot;number&quot;] {
+      width: 100%; padding: 8px; font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%; padding: 10px;
+      background-color: #d9272e; color: white; font-size: 16px;
+      border: none; border-radius: 4px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Jio Incentive Calculator&lt;/h2&gt;
+
+  &lt;label for=&quot;sim&quot;&gt;New SIM Sold&lt;/label&gt;
+  &lt;input type=&quot;number&quot; id=&quot;sim&quot; placeholder=&quot;Enter SIM count&quot;&gt;
+
+  &lt;label for=&quot;mnp&quot;&gt;MNP Count&lt;/label&gt;
+  &lt;input type=&quot;number&quot; id=&quot;mnp&quot; placeholder=&quot;Enter MNP count&quot;&gt;
+
+  &lt;label for=&quot;airfiber&quot;&gt;AirFiber Bookings&lt;/label&gt;
+  &lt;input type=&quot;number&quot; id=&quot;airfiber&quot; placeholder=&quot;Enter AirFiber count&quot;&gt;
+
+  &lt;button onclick=&quot;calculate()&quot;&gt;Calculate Incentive&lt;/button&gt;
+
+  &lt;div id=&quot;result&quot;&gt;&lt;/div&gt;
+
+  &lt;script&gt;
+    function calculate() {
+      const sim = Number(document.getElementById('sim').value) || 0;
+      const mnp = Number(document.getElementById('mnp').value) || 0;
+      const airfiber = Number(document.getElementById('airfiber').value) || 0;
+
+      const incentive = sim * 10 + mnp * 20 + airfiber * 100;
+
+      document.getElementById('result').innerText = &quot;Total Incentive: ₹&quot; + incentive;
+    }
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</body>
+</html>
