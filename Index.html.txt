@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jio Incentive Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      background-color: #f2f2f2;
+    }
+    h2 { color: #d9272e; }
+    label { display: block; margin: 10px 0 5px; }
+    input[type="number"] {
+      width: 100%; padding: 8px; font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%; padding: 10px;
+      background-color: #d9272e; color: white; font-size: 16px;
+      border: none; border-radius: 4px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Jio Incentive Calculator</h2>
+
+  <label for="sim">New SIM Sold</label>
+  <input type="number" id="sim" placeholder="Enter SIM count">
+
+  <label for="mnp">MNP Count</label>
+  <input type="number" id="mnp" placeholder="Enter MNP count">
+
+  <label for="airfiber">AirFiber Bookings</label>
+  <input type="number" id="airfiber" placeholder="Enter AirFiber count">
+
+  <button onclick="calculate()">Calculate Incentive</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      const sim = Number(document.getElementById('sim').value) || 0;
+      const mnp = Number(document.getElementById('mnp').value) || 0;
+      const airfiber = Number(document.getElementById('airfiber').value) || 0;
+
+      const incentive = sim * 10 + mnp * 20 + airfiber * 100;
+
+      document.getElementById('result').innerText = "Total Incentive: ₹" + incentive;
+    }
+  </script>
+
+</body>
+</html>
