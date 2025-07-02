@@ -1,82 +1,430 @@
+<!-- VERSION C13 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 7.6.4.1 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
-		pre { background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		pre.cjk { font-family: "NSimSun", monospace; font-size: 10pt }
-		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
-	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre class="western">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot; /&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
-  &lt;title&gt;Jio Incentive Calculator&lt;/title&gt;
-  &lt;style&gt;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jio Retailer - Monthly Incentive Calculator - C13</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 400px;
-      margin: auto;
-      background-color: #f2f2f2;
+      font-family: 'Roboto', sans-serif;
+      margin: 20px;
+      background: #fafafa;
     }
-    h2 { color: #d9272e; }
-    label { display: block; margin: 10px 0 5px; }
-    input[type=&quot;number&quot;] {
-      width: 100%; padding: 8px; font-size: 16px;
+    h2 {
+      color: #0b57d0;
+      text-align: center;
+    }
+    .instruction {
+      text-align: Left;
+      color: #555;
+      font-size: 12px;
+      margin-top: -10px;
+      margin-bottom: 0px;
+    }
+    .emboss-line {
+      height: 2px;
+      background: linear-gradient(to right, #e0e0e0, #cfcfcf, #e0e0e0);
+      box-shadow: inset 0 1px #fff, inset 0 -1px #aaa;
+      margin: 2px 0 2px;
+    }
+    .section {
+      padding: 12px 0;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    .section h3 {
+      margin-bottom: 4px;
+      color: #333;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .row .input-pair {
+      display: flex;
+      flex: 1 1 48%;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 6px;
+    }
+    .row label {
+      flex: 1;
+      font-weight: 500;
+    }
+    .row input,
+    .row select {
+      flex: 0 0 80px;
+      padding: 6px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: right;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .action-buttons button {
+      flex: 1;
+    }
+    .reset-btn {
+      background-color: #dc3545;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
     }
     button {
-      margin-top: 20px;
-      width: 100%; padding: 10px;
-      background-color: #d9272e; color: white; font-size: 16px;
-      border: none; border-radius: 4px;
+      background-color: #28a745;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
     }
-    #result {
-      margin-top: 20px;
+    .post-instruction {
+      text-align: Left;
+      color: #777;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-height: 80%;
+      overflow-y: auto;
+    }
+    .modal table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .modal th,
+    .modal td {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    .modal tr.bonus-row td {
       font-weight: bold;
-      font-size: 18px;
+      background-color: #f3f3f3;
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-  &lt;h2&gt;Jio Incentive Calculator&lt;/h2&gt;
-
-  &lt;label for=&quot;sim&quot;&gt;New SIM Sold&lt;/label&gt;
-  &lt;input type=&quot;number&quot; id=&quot;sim&quot; placeholder=&quot;Enter SIM count&quot;&gt;
-
-  &lt;label for=&quot;mnp&quot;&gt;MNP Count&lt;/label&gt;
-  &lt;input type=&quot;number&quot; id=&quot;mnp&quot; placeholder=&quot;Enter MNP count&quot;&gt;
-
-  &lt;label for=&quot;airfiber&quot;&gt;AirFiber Bookings&lt;/label&gt;
-  &lt;input type=&quot;number&quot; id=&quot;airfiber&quot; placeholder=&quot;Enter AirFiber count&quot;&gt;
-
-  &lt;button onclick=&quot;calculate()&quot;&gt;Calculate Incentive&lt;/button&gt;
-
-  &lt;div id=&quot;result&quot;&gt;&lt;/div&gt;
-
-  &lt;script&gt;
-    function calculate() {
-      const sim = Number(document.getElementById('sim').value) || 0;
-      const mnp = Number(document.getElementById('mnp').value) || 0;
-      const airfiber = Number(document.getElementById('airfiber').value) || 0;
-
-      const incentive = sim * 10 + mnp * 20 + airfiber * 100;
-
-      document.getElementById('result').innerText = &quot;Total Incentive: ₹&quot; + incentive;
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
     }
-  &lt;/script&gt;
+    .error-message {
+      color: red;
+      font-size: 11px;
+      margin-left: 6px;
+    }
+    .share-btn {
+      background-color: #25d366;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+    }
+    .download-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    @media screen and (max-width: 480px) {
+      .row label {
+        flex: 1;
+        font-size: 13px;
+      }
+      .row input,
+      .row select {
+        flex: 0 0 70px;
+        font-size: 13px;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
 
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+<h2>Jio Retailer - Monthly Incentive Calculator</h2>
+<p class="instruction">*This calculator provides tentative payouts. Final incentives will be as per company system, subject to eligibility and conditions<br>
+*Enter your monthly committed numbers below.
+
+</p>
+<div class="emboss-line"></div>
+
+<div class="section">
+  <h3>1. MNP Activation</h3>
+  <div class="row">
+    <label>₹299 Plan</label>
+    <input type="number" id="mnp299" min="0" max="999">
+    <span class="error-message" id="err-mnp299"></span>
+    
+  
+    <label>₹349 Plan</label>
+    <input type="number" id="mnp349" min="0" max="999">
+    <span class="error-message" id="err-mnp349"></span>
+  </div>
+</div>
+
+<div class="section">
+  <h3>2. New SIM Activation</h3>
+  <div class="row"><label>₹299 Plan</label><input type="number" id="sim299" min="0" max="999"></div>
+  <div class="row"><label>₹349 Plan</label><input type="number" id="sim349" min="0" max="999"></div>
+</div>
+
+<div class="section">
+  <h3>3. Type of Retailer</h3>
+  <div class="row">
+    <label>3a. Retailer Type</label>
+    <select id="retailerType">
+      <option value="" disabled selected>Select</option>
+      <option value="JPR">JPR</option>
+      <option value="Non-JPR">Non-JPR</option>
+    </select>
+  </div>
+</div>
+
+<div class="section">
+  <h3>4. JAF Bookings</h3>
+  <div class="row"><label>₹1111 Booking</label><input type="number" id="jaf1111" min="0" max="999"></div>
+  <div class="row"><label>₹2222 Booking</label><input type="number" id="jaf2222" min="0" max="999"></div>
+  <div class="row"><label>Unlimited Offer</label><input type="number" id="jafUnlimited" min="0" max="999"></div>
+</div>
+
+<div class="section">
+  <h3>5. JioBharat Sales</h3>
+  <div class="row"><label>V4 (MOP - 799)</label><input type="number" id="jbV4" min="0" max="999"></div>
+  <div class="row"><label>B2 (MOP - 1399)</label><input type="number" id="jbB2" min="0" max="999"></div>
+  <div class="row"><label>J1 (MOP - 1799)</label><input type="number" id="jbJ1" min="0" max="999"></div>
+</div>
+
+<div class="section">
+  <h3>6. JioBharat – MNP</h3>
+  <div class="row"><label>FR 123/234</label><input type="number" id="jbMnp123" min="0" max="999"></div>
+  <div class="row"><label>FR 1234</label><input type="number" id="jbMnp1234" min="0" max="999"></div>
+</div>
+
+<div class="section">
+  <h3>7. JioBharat – New SIM</h3>
+  <div class="row"><label>FR 123/234</label><input type="number" id="jbNewSIM123" min="0" max="999"></div>
+  <div class="row"><label>FR 1234</label><input type="number" id="jbNewSIM1234" min="0" max="999"></div>
+</div>
+
+<div class="action-buttons">
+  <button onclick="calculate()">Calculate</button>
+  <button class="reset-btn" onclick="resetFields()">Reset</button>
+</div>
+<p class="post-instruction">*This calculator provides tentative payouts.<br>
+* Created by GT retailer.
+</p>
+
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+<div class="modal" id="resultModal">
+  <h3>Your Total Earning</h3><p class="post-instruction">*This calculator provides tentative payouts</p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Count</th><th>Incentive </th></tr>
+    </thead>
+    <tbody id="resultTableBody"></tbody>
+    <tr class="bonus-row"><td colspan="2">MNP Big Hitter Inc.</td><td id="mnpBonusCell">₹0</td></tr>
+    <tr class="bonus-row"><td colspan="2">FR 349 Slab Inc.</td><td id="fr349BonusCell">₹0</td></tr>
+    <tr class="bonus-row"><td colspan="2">MNP Booster Inc.</td><td id="mnpBoosterCell">₹0</td></tr>
+    <tfoot>
+      <tr><th colspan="2">Total</th><th id="grandTotal">₹0</th></tr>
+    </tfoot>
+  </table>
+  <button class="share-btn" onclick="shareWhatsApp()">Share via WhatsApp</button>
+  <button class="download-btn" onclick="downloadImage()">Download as Image</button>
+</div>
+
+<script>
+function resetFields() {
+  const inputs = document.querySelectorAll("input[type='number']");
+  inputs.forEach(input => input.value = "");
+  document.getElementById("retailerType").selectedIndex = 0;
+}
+
+function shareWhatsApp() {
+  const modal = document.getElementById("resultModal");
+  const total = document.getElementById("grandTotal").innerText;
+  const message = `My total Jio Partner earning this month is ${total}. Summary below 👇`;
+
+  const originalMaxHeight = modal.style.maxHeight;
+  const originalOverflow = modal.style.overflow;
+  modal.style.maxHeight = 'none';
+  modal.style.overflow = 'visible';
+
+  setTimeout(() => {
+    html2canvas(modal).then(canvas => {
+      modal.style.maxHeight = originalMaxHeight;
+      modal.style.overflow = originalOverflow;
+
+      canvas.toBlob(function(blob) {
+        const file = new File([blob], "summary.png", { type: "image/png" });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            text: message
+          });
+        } else {
+          alert("Sharing not supported on this browser. Use a mobile device or take a screenshot manually.");
+        }
+      });
+    });
+  }, 100);
+}
+
+function downloadImage() {
+  const modal = document.getElementById("resultModal");
+  const originalMaxHeight = modal.style.maxHeight;
+  const originalOverflow = modal.style.overflow;
+  modal.style.maxHeight = 'none';
+  modal.style.overflow = 'visible';
+
+  setTimeout(() => {
+    html2canvas(modal).then(canvas => {
+      modal.style.maxHeight = originalMaxHeight;
+      modal.style.overflow = originalOverflow;
+
+      const link = document.createElement("a");
+      link.download = "incentive-summary.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  }, 100);
+}
+
+function closePopup() {
+  document.getElementById("resultModal").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
+
+function get(id) {
+  const value = document.getElementById(id)?.value;
+  return parseInt(value) || 0;
+}
+
+function calculate() {
+  // Placeholder for actual form IDs and calculations
+  const resultBody = document.getElementById("resultTableBody");
+  resultBody.innerHTML = "";
+
+  const entries = [
+    ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 209 + get("mnp349") * 234],
+    ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 122 + get("sim349") * 132],
+    ["JAF Booking", get("jaf1111") + get("jaf2222") + get("jafUnlimited"), get("jaf1111") * 96 + get("jaf2222") * 96 + get("jafUnlimited") * 120],
+    ["JioBharat Sales", get("jbV4") + get("jbB2") + get("jbJ1"), get("jbV4") * 125 + get("jbB2") * 160 + get("jbJ1") * 200],
+    ["JB MNP", get("jbMnp123") + get("jbMnp1234"), get("jbMnp123") * 96 + get("jbMnp1234") * 193],
+    ["JB New SIM", get("jbNewSIM123") + get("jbNewSIM1234"), get("jbNewSIM123") * 18 + get("jbNewSIM1234") * 48]
+  ];
+
+  let total = 0;
+  for (const [label, count, amount] of entries) {
+    total += amount;
+    resultBody.innerHTML += `<tr><td>${label}</td><td>${count}</td><td>₹${amount.toFixed(2)}</td></tr>`;
+  }
+
+  // Bonuses
+  let mnpTotal = get("mnp299") + get("mnp349");
+  let sim349 = get("sim349");
+  let mnp349 = get("mnp349");
+
+  let mnpBonus = 0;
+  if (mnpTotal >= 10 && mnpTotal <= 19) mnpBonus = 387;
+  else if (mnpTotal >= 20 && mnpTotal <= 29) mnpBonus = 775;
+  else if (mnpTotal >= 30 && mnpTotal <= 59) mnpBonus = 1163;
+  else if (mnpTotal >= 60 && mnpTotal <= 99) mnpBonus = 2423;
+  else if (mnpTotal >= 100 && mnpTotal <= 149) mnpBonus = 4846;
+  else if (mnpTotal >= 150) mnpBonus = 6785;
+
+  document.getElementById("mnpBonusCell").innerText = `₹${mnpBonus}`;
+  total += mnpBonus;
+
+  let fr349Total = mnp349 + sim349;
+  let fr349Bonus = 0;
+  if (fr349Total >= 5 && fr349Total <= 9) fr349Bonus = fr349Total * 10;
+  else if (fr349Total >= 10) fr349Bonus = fr349Total * 20;
+
+  document.getElementById("fr349BonusCell").innerText = `₹${fr349Bonus}`;
+  total += fr349Bonus;
+
+  let M = Math.floor(mnpTotal / 3);
+  let mnpBoosterRate = 0;
+  if (M >= 1 && M <= 3) mnpBoosterRate = 33;
+  else if (M >= 4 && M <= 9) mnpBoosterRate = 48;
+  else if (M >= 10) mnpBoosterRate = 63;
+
+  const mnpBoosterInc = 3 * M * mnpBoosterRate;
+  document.getElementById("mnpBoosterCell").innerText = `₹${mnpBoosterInc}`;
+  total += mnpBoosterInc;
+
+  document.getElementById("grandTotal").innerText = `₹${total.toFixed(2)}`;
+  document.getElementById("resultModal").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+}
+
+document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.setAttribute('placeholder', '0');
+    input.setAttribute('min', '0');
+    input.setAttribute('step', '1');
+
+    input.addEventListener('input', () => {
+      const val = input.value;
+      const errEl = document.getElementById('err-' + input.id);
+
+      if (val.includes('.')) {
+        input.value = Math.floor(val);
+        errEl.innerText = 'Decimal not allowed';
+      } else if (val < 0) {
+        input.value = 0;
+        errEl.innerText = 'Only positive numbers allowed';
+      } else {
+        errEl.innerText = '';
+      }
+    });
+  });
+  
+  
+</script>
+
 </body>
+</html>
 </html>
