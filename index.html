@@ -7,6 +7,17 @@
   <title>Jio Retailer - Monthly Incentive Calculator - C13</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GH8905Y6B"></script>
+ <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9GH8905Y6B');
+ </script>
+
+  
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -368,6 +379,12 @@ function get(id) {
 }
 
 function calculate() {
+
+  gtag('event', 'calculate_clicked', {
+  'event_category': 'Calculator',
+  'event_label': 'Retailer Monthly Incentive'
+  });
+  
   // Placeholder for actual form IDs and calculations
   const resultBody = document.getElementById("resultTableBody");
   resultBody.innerHTML = "";
