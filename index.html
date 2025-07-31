@@ -372,14 +372,19 @@ function calculate() {
   const resultBody = document.getElementById("resultTableBody");
   resultBody.innerHTML = "";
 
-  const entries = [
-    ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 127 + get("mnp349") * 234],
-    ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 76 + get("sim349") * 132],
-    ["JAF Booking", get("jaf1111") + get("jaf2222") + get("jafUnlimited"), get("jaf1111") * 96 + get("jaf2222") * 96 + get("jafUnlimited") * 120],
-    ["JioBharat Sales", get("jbV4") + get("jbB2") + get("jbJ1"), get("jbV4") * 125 + get("jbB2") * 160 + get("jbJ1") * 200],
-    ["JB MNP", get("jbMnp123") + get("jbMnp1234"), get("jbMnp123") * 96 + get("jbMnp1234") * 193],
-    ["JB New SIM", get("jbNewSIM123") + get("jbNewSIM1234"), get("jbNewSIM123") * 18 + get("jbNewSIM1234") * 48]
-  ];
+const retailerType = document.getElementById("retailerType").value;
+const jaf2222Rate = retailerType === "JPR" ? 200 : 96;
+
+const entries = [
+  ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 127 + get("mnp349") * 234],
+  ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 76 + get("sim349") * 132],
+  ["JAF Booking", get("jaf1111") + get("jaf2222") + get("jafUnlimited"),
+    get("jaf1111") * 96 + get("jaf2222") * jaf2222Rate + get("jafUnlimited") * 120],
+  ["JioBharat Sales", get("jbV4") + get("jbB2") + get("jbJ1"), get("jbV4") * 125 + get("jbB2") * 160 + get("jbJ1") * 200],
+  ["JB MNP", get("jbMnp123") + get("jbMnp1234"), get("jbMnp123") * 96 + get("jbMnp1234") * 193],
+  ["JB New SIM", get("jbNewSIM123") + get("jbNewSIM1234"), get("jbNewSIM123") * 18 + get("jbNewSIM1234") * 48]
+];
+
 
   let total = 0;
   for (const [label, count, amount] of entries) {
