@@ -368,8 +368,8 @@ function calculate() {
   resultBody.innerHTML = "";
 
   const entries = [
-    ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 209 + get("mnp349") * 234],
-    ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 122 + get("sim349") * 132],
+    ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 127 + get("mnp349") * 234],
+    ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 76 + get("sim349") * 132],
     ["JAF Booking", get("jaf1111") + get("jaf2222") + get("jafUnlimited"), get("jaf1111") * 96 + get("jaf2222") * 96 + get("jafUnlimited") * 120],
     ["JioBharat Sales", get("jbV4") + get("jbB2") + get("jbJ1"), get("jbV4") * 125 + get("jbB2") * 160 + get("jbJ1") * 200],
     ["JB MNP", get("jbMnp123") + get("jbMnp1234"), get("jbMnp123") * 96 + get("jbMnp1234") * 193],
@@ -400,8 +400,8 @@ function calculate() {
 
   let fr349Total = mnp349 + sim349;
   let fr349Bonus = 0;
-  if (fr349Total >= 5 && fr349Total <= 9) fr349Bonus = fr349Total * 10;
-  else if (fr349Total >= 10) fr349Bonus = fr349Total * 20;
+  if (fr349Total >= 10 && fr349Total <= 49) fr349Bonus = fr349Total * 10;
+  else if (fr349Total >= 50) fr349Bonus = 1000; 
 
   document.getElementById("fr349BonusCell").innerText = `₹${fr349Bonus}`;
   total += fr349Bonus;
