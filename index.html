@@ -406,7 +406,7 @@ function calculate() {
   document.getElementById("fr349BonusCell").innerText = `₹${fr349Bonus}`;
   total += fr349Bonus;
 
-  let M = Math.floor(mnpTotal / 3);
+  let M = Math.floor(mnp349 / 3);
   let mnpBoosterRate = 0;
   if (M >= 1 && M <= 3) mnpBoosterRate = 33;
   else if (M >= 4 && M <= 9) mnpBoosterRate = 48;
