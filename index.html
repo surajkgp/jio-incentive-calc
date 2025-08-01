@@ -318,6 +318,32 @@
   <button class="download-btn" onclick="downloadImage()">Download as Image</button>
 </div>
 
+ <script>
+let translations = {};
+
+async function loadLanguageFile() {
+  const response = await fetch('translations.json');
+  translations = await response.json();
+
+  const currentLang = document.getElementById("languageSelector").value || 'en';
+  changeLanguage(currentLang);
+}
+
+function changeLanguage(lang) {
+  const langData = translations[lang];
+  if (!langData) return;
+
+  for (const key in langData) {
+    const el = document.getElementById(key);
+    if (el) {
+      el.innerText = langData[key];
+    }
+  }
+}
+
+loadLanguageFile();
+</script> 
+  
 <script>
 function resetFields() {
   const inputs = document.querySelectorAll("input[type='number']");
@@ -494,33 +520,7 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
       }
     });
   });
-  
- <script>
- let translations = {};
-
- async function loadLanguageFile() {
-  const response = await fetch('translations.json');
-  translations = await response.json();
-
-  // Automatically apply the current dropdown selection
-  const currentLang = document.getElementById("languageSelector").value || 'en';
-  changeLanguage(currentLang);
-}
-
- function changeLanguage(lang) {
-  const langData = translations[lang];
-  if (!langData) return;
-
-  for (const key in langData) {
-    const el = document.getElementById(key);
-    if (el) {
-      el.innerText = langData[key];
-    }
-  }
-}
-
-// Load translations once when page loads
- loadLanguageFile();
+ 
 </script>
 </body>
 </html>
