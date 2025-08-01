@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jio Retailer - Monthly Incentive Calculator - C13</title>
+  <div style="text-align:right; margin-bottom: 10px;">
+  <label for="langSelect"><strong>Language:</strong></label>
+  <select id="langSelect" onchange="changeLanguage(this.value)">
+    <option value="en">English</option>
+    <option value="hi">हिंदी</option>
+  </select>
+</div>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <!-- Google tag (gtag.js) -->
@@ -181,9 +188,16 @@
 </head>
 <body>
 
-<h2>Jio Retailer - Monthly Incentive Calculator</h2>
 
-<p class="instruction" style="font-weight: bold; color: #ff0000;">
+<select id="languageSelector" onchange="changeLanguage(this.value)" style="margin-bottom: 10px;">
+  <option value="en">English</option>
+  <option value="hi">हिन्दी</option>
+</select>
+
+  
+<h2 id="title">Jio Retailer - Monthly Incentive Calculator</h2>
+
+<p class="instruction" id="goldNote" style="font-weight: bold; color: #ff0000;">
   💰 WIN A GOLD COIN! 📞 Call Team Jio – Don’t Miss Out!<br>
 </p>
 
@@ -488,8 +502,29 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
   });
   
   
-</script>
+<script>
+let translations = {};
 
+async function loadLanguageFile() {
+  const response = await fetch('lang.json');
+  translations = await response.json();
+}
+
+function changeLanguage(lang) {
+  const langData = translations[lang];
+  if (!langData) return;
+
+  for (const key in langData) {
+    const el = document.getElementById(key);
+    if (el) {
+      el.innerText = langData[key];
+    }
+  }
+}
+
+// Load once when page opens
+loadLanguageFile();
+</script>
 </body>
 </html>
 </html>
