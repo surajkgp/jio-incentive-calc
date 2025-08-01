@@ -495,10 +495,10 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
     });
   });
   
-<script>
-let translations = {};
+ <script>
+ let translations = {};
 
-async function loadLanguageFile() {
+ async function loadLanguageFile() {
   const response = await fetch('translations.json');
   translations = await response.json();
 
@@ -507,7 +507,7 @@ async function loadLanguageFile() {
   changeLanguage(currentLang);
 }
 
-function changeLanguage(lang) {
+ function changeLanguage(lang) {
   const langData = translations[lang];
   if (!langData) return;
 
@@ -520,8 +520,7 @@ function changeLanguage(lang) {
 }
 
 // Load translations once when page loads
-loadLanguageFile();
+ loadLanguageFile();
 </script>
 </body>
-</html>
 </html>
