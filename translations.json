@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": "Jio Retailer - Monthly Incentive Calculator",
+    "mnpActivation": "MNP Activation",
+    "newSIM": "New SIM Activation",
+    "retailerType": "Type of Retailer",
+    "jafBooking": "JAF Bookings",
+    "jioBharatSales": "JioBharat Sales",
+    "jbMnp": "JioBharat – MNP",
+    "jbNewSim": "JioBharat – New SIM",
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "totalEarning": "Your Total Earning",
+    "mnpBoosterInc": "MNP Booster Inc.",
+    "lapsLabel": "#MNP in Laps",
+    "goldNote": "💰 WIN A GOLD COIN! 📞 Call Team Jio – Don’t Miss Out!",
+    "disclaimer": "*This calculator provides tentative payouts. Final incentives will be as per company system, subject to eligibility and conditions."
+  },
+  "hi": {
+    "title": "जिओ रिटेलर - मासिक इंसेंटिव कैलकुलेटर",
+    "mnpActivation": "एमएनपी सक्रियण",
+    "newSIM": "नई सिम सक्रियण",
+    "retailerType": "रिटेलर का प्रकार",
+    "jafBooking": "जेएएफ बुकिंग",
+    "jioBharatSales": "जिओ भारत बिक्री",
+    "jbMnp": "जिओ भारत – एमएनपी",
+    "jbNewSim": "जिओ भारत – नई सिम",
+    "calculate": "कैलकुलेट करें",
+    "reset": "रीसेट करें",
+    "totalEarning": "आपकी कुल कमाई",
+    "mnpBoosterInc": "एमएनपी बूस्टर इंसेंटिव",
+    "lapsLabel": "#एमएनपी इन लैप्स",
+    "goldNote": "💰 एक गोल्ड कॉइन जीतें! 📞 टीम जिओ को कॉल करें – मौका न चूकें!",
+    "disclaimer": "*यह कैलकुलेटर अनुमानित भुगतान दिखाता है। अंतिम इंसेंटिव कंपनी की प्रणाली के अनुसार पात्रता और शर्तों पर निर्भर करेगा।"
+  }
+}
+
+//Added translation file for English and Hindi
