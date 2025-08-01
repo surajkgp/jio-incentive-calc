@@ -506,7 +506,7 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
 let translations = {};
 
 async function loadLanguageFile() {
-  const response = await fetch('lang.json');
+  const response = await fetch('translations.json');
   translations = await response.json();
 }
 
