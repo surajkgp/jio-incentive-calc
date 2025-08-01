@@ -433,32 +433,33 @@ const entries = [
   document.getElementById("fr349BonusCell").innerText = `₹${fr349Bonus}`;
   total += fr349Bonus;
 
-let M = Math.floor(mnp349 / 3);
-let R = mnp349 % 3;
+ // MNP Booster Updated
+  let M = Math.floor(mnp349 / 3);
+  let R = mnp349 % 3;
 
-let laps = [];
-if (R === 0) {
-  laps = [M, M, M];
-} else if (R === 1) {
-  laps = [M, M, M + 1];
-} else if (R === 2) {
-  laps = [M, M + 1, M + 1];
-}
+  let laps = [];
+  if (R === 0) {
+    laps = [M, M, M];
+  } else if (R === 1) {
+    laps = [M, M, M + 1];
+  } else if (R === 2) {
+    laps = [M, M + 1, M + 1];
+  }
 
-function rateFor(m) {
-  if (m >= 1 && m <= 3) return 33;
-  if (m >= 4 && m <= 9) return 48;
-  if (m >= 10) return 63;
-  return 0;
-}
+  function rateFor(m) {
+    if (m >= 1 && m <= 3) return 33;
+    if (m >= 4 && m <= 9) return 48;
+    if (m >= 10) return 63;
+    return 0;
+  }
 
-let mnpBoosterInc = 0;
-for (let i = 0; i < 3; i++) {
-  mnpBoosterInc += laps[i] * rateFor(laps[i]);
-}
+  let mnpBoosterInc = 0;
+  for (let i = 0; i < 3; i++) {
+    mnpBoosterInc += laps[i] * rateFor(laps[i]);
+  }
 
-document.getElementById("mnpBoosterCell").innerText = `₹${mnpBoosterInc} (Laps: ${laps.join(", ")})`;
-
+  document.getElementById("mnpBoosterCell").innerHTML = `₹${mnpBoosterInc}<br><span style="font-weight:normal; font-size: 12px; font-style: italic;">Laps: ${laps.join(", ")}</span>`;
+  total += mnpBoosterInc;
 
   document.getElementById("grandTotal").innerText = `₹${total.toFixed(2)}`;
   document.getElementById("resultModal").style.display = "block";
