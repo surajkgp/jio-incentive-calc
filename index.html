@@ -433,15 +433,23 @@ const entries = [
   document.getElementById("fr349BonusCell").innerText = `₹${fr349Bonus}`;
   total += fr349Bonus;
 
-  let M = Math.floor(mnp349 / 3);
-  let mnpBoosterRate = 0;
-  if (M >= 1 && M <= 3) mnpBoosterRate = 33;
-  else if (M >= 4 && M <= 9) mnpBoosterRate = 48;
-  else if (M >= 10) mnpBoosterRate = 63;
+let M = Math.floor(mnp349 / 3);
+let mnpBoosterRate = 0;
+let mnpBoosterInc = 0;
 
-  const mnpBoosterInc = 3 * M * mnpBoosterRate;
+if (M >= 1 && M <= 3) mnpBoosterRate = 33;
+else if (M >= 4 && M <= 9) mnpBoosterRate = 48;
+else if (M >= 10) mnpBoosterRate = 63;
+
+if (M > 0) {
+  mnpBoosterInc = 3 * M * mnpBoosterRate;
   document.getElementById("mnpBoosterCell").innerText = `₹${mnpBoosterInc}`;
+  document.getElementById("mnpBoosterLabel").innerText = `MNP Booster (Assuming ${M} per lap)`;
   total += mnpBoosterInc;
+} else {
+  document.getElementById("mnpBoosterCell").innerText = `₹0`;
+  document.getElementById("mnpBoosterLabel").innerText = ``;
+}
 
   document.getElementById("grandTotal").innerText = `₹${total.toFixed(2)}`;
   document.getElementById("resultModal").style.display = "block";
