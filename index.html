@@ -495,12 +495,16 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
     });
   });
   
-  <script>
+<script>
 let translations = {};
 
 async function loadLanguageFile() {
   const response = await fetch('translations.json');
   translations = await response.json();
+
+  // Automatically apply the current dropdown selection
+  const currentLang = document.getElementById("languageSelector").value || 'en';
+  changeLanguage(currentLang);
 }
 
 function changeLanguage(lang) {
@@ -515,7 +519,7 @@ function changeLanguage(lang) {
   }
 }
 
-// Load once when page opens
+// Load translations once when page loads
 loadLanguageFile();
 </script>
 </body>
