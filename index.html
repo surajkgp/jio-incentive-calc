@@ -323,7 +323,6 @@ loadLanguageFile();
 function resetFields() {
   const inputs = document.querySelectorAll("input[type='number']");
   inputs.forEach(input => input.value = "");
-  document.getElementById("retailerType").selectedIndex = 0;
 }
 
 function shareWhatsApp() {
@@ -398,8 +397,7 @@ function calculate() {
   const resultBody = document.getElementById("resultTableBody");
   resultBody.innerHTML = "";
 
-const retailerType = document.getElementById("retailerType").value;
-const jaf2222Rate = retailerType === "JPR" ? 200 : 96;
+
 
 const entries = [
   ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 127 + get("mnp349") * 234],
