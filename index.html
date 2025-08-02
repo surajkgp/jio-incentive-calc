@@ -227,35 +227,18 @@
   </div>
 </div>
 
-<div class="section">
-  <h3>3. Type of Retailer</h3>
-  <div class="row">
-    <label>3a. Retailer Type</label>
-    <select id="retailerType">
-      <option value="" disabled selected>Select</option>
-      <option value="JPR">JPR</option>
-      <option value="Non-JPR">Non-JPR</option>
-    </select>
-  </div>
-</div>
+
 
 <div class="section">
-  <h3>4. JAF Bookings</h3>
+  <h3>3. JAF Bookings</h3>
   <div class="row">
     <label>₹1111 Booking</label>
     <input type="number" id="jaf1111" min="0" max="999"><span class="error-message" id="jaf1111"></span>
-  
-    <label>₹2222 Booking</label>
-    <input type="number" id="jaf2222" min="0" max="999"><span class="error-message" id="jaf2222"></span>
-  </div>
-  <div class="row">
-    <label>Unlimited Offer</label>
-    <input type="number" id="jafUnlimited" min="0" max="999"><span class="error-message" id="jafUnlimited"></span>
   </div>
 </div>
 
 <div class="section">
-  <h3>5. JioBharat Sales</h3>
+  <h3>4. JioBharat Sales</h3>
   <div class="row">
     <label>V4 (₹799)</label>
     <input type="number" id="jbV4" min="0" max="999"><span class="error-message" id="jbV4"></span>
@@ -265,31 +248,23 @@
   </div>
   <div class="row">
     <label>J1 (₹1799)</label>
-    <input type="number" id="jbJ1" min="0" max="999"><span class="error-message" id="jbJ1"></span>
+  <input type="number" id="jbJ1" min="0" max="999">
+  <span class="error-message" id="jbJ1"></span>
   </div>
 </div>
 
 <div class="section">
-  <h3>6. JioBharat – MNP</h3>
+  <h3>5. JioBharat – MNP</h3>
   <div class="row">
-    <label>FR 123/234</label>
+    <label>MNP FR 123/234</label>
     <input type="number" id="jbMnp123" min="0" max="999"><span class="error-message" id="jbMnp123"></span>
   
-    <label>FR 1234</label>
-    <input type="number" id="jbMnp1234" min="0" max="999"><span class="error-message" id="jbMnp1234"></span>
+    <label>New SIM FR 123/234</label>
+    <input type="number" id="jbNewSIM123" min="0" max="999"><span class="error-message" id="jbNewSIM123"></span>
   </div>
 </div>
 
-<div class="section">
-  <h3>7. JioBharat – New SIM</h3>
-  <div class="row">
-    <label>FR 123/234</label>
-    <input type="number" id="jbNewSIM123" min="0" max="999"><span class="error-message" id="jbNewSIM123"></span>
-  
-    <label>FR 1234</label>
-    <input type="number" id="jbNewSIM1234" min="0" max="999"><span class="error-message" id="jbNewSIM1234"></span>
-  </div>
-</div>
+
 
 <div class="action-buttons">
   <button onclick="calculate()">Calculate</button>
@@ -429,8 +404,7 @@ const jaf2222Rate = retailerType === "JPR" ? 200 : 96;
 const entries = [
   ["MNP Activation", get("mnp299") + get("mnp349"), get("mnp299") * 127 + get("mnp349") * 234],
   ["New SIM Activation", get("sim299") + get("sim349"), get("sim299") * 76 + get("sim349") * 132],
-  ["JAF Booking", get("jaf1111") + get("jaf2222") + get("jafUnlimited"),
-    get("jaf1111") * 96 + get("jaf2222") * jaf2222Rate + get("jafUnlimited") * 120],
+  ["JAF Booking", get("jaf1111"), get("jaf1111") * 96],
   ["JioBharat Sales", get("jbV4") + get("jbB2") + get("jbJ1"), get("jbV4") * 125 + get("jbB2") * 160 + get("jbJ1") * 200],
   ["JB MNP", get("jbMnp123") + get("jbMnp1234"), get("jbMnp123") * 96 + get("jbMnp1234") * 193],
   ["JB New SIM", get("jbNewSIM123") + get("jbNewSIM1234"), get("jbNewSIM123") * 18 + get("jbNewSIM1234") * 48]
