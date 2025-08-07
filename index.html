@@ -225,6 +225,15 @@
     <input type="number" id="sim349" min="0" max="999">
     <span class="error-message" id="err-sim349"></span>
   </div>
+    
+<div class="row">
+    <label>JMN Booking</label>
+    <input type="number" id="jmnBooking" min="0" max="999">
+    <span class="error-message" id="err-jmnBooking"></span>
+  </div>
+  <p class="instruction" style="margin-top: -4px; color: #0b57d0; font-size: 8px;">
+    <strong>Do 2+ JMN/day → ₹10 extra per MNP ₹349 that day</strong>
+  </p>
 </div>
 
 
@@ -419,6 +428,12 @@ const entries = [
   }
 
   // Bonuses
+  
+  let jmnBooking = get("jmnBooking");
+  let jmnIncentive = jmnBooking * 10;
+  resultBody.innerHTML += `<tr><td>JMN Booking Incentive</td><td>${jmnBooking}</td><td>₹${jmnIncentive}</td></tr>`;
+  total += jmnIncentive;
+  
   let mnpTotal = get("mnp299") + get("mnp349");
   let sim349 = get("sim349");
   let mnp349 = get("mnp349");
