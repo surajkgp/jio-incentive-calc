@@ -26,6 +26,20 @@
       background: #fafafa;
       font-size: 14px;
     }
+
+    .row-single label {
+  flex: 0 0 auto;      /* label takes only required width */
+  margin-right: 8px;
+}
+
+.row-single input {
+  flex: 0 0 70px;      /* fixed width, sits right next to label */
+}
+
+.row-single .error-message {
+  flex: 0 0 auto;      /* error text after input */
+}
+    
     h2 {
       color: #0b57d0;
       text-align: center;
@@ -287,15 +301,13 @@
     <label>New SIM FR 23/../369</label>
     <input type="number" id="jbNewSIM123" min="0" max="999"><span class="error-message" id="jbNewSIM123"></span>
   </div>
-  <div class="row">
+  
+<div class="row row-single">
   <label>Booking (₹100)</label>
   <input type="number" id="BKG" min="0" max="999">
   <span class="error-message" id="err-BKG"></span>
-
-  <!-- Dummy pair to align layout -->
-  <label style="visibility: hidden;">placeholder</label>
-  <input style="visibility: hidden;">
 </div>
+  
  <p class="instruction" style="margin-top: -4px; color: #0b57d0; font-size: 10px;">
   FR 23/../369 includes 23/123/234/269/369 recharge plan.
 </p>
