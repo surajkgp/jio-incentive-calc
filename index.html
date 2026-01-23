@@ -1,10 +1,10 @@
-<!-- VERSION C32 (No divider after V4 row + tighter JioBharat spacing + Booking label match + remove ₹10/MNP×3 subtext) -->
+<!-- VERSION C33 (Move Sell & Win after New SIM Activation) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jio Retailer - Lap Incentive Calculator - C32</title>
+  <title>Jio Retailer - Lap Incentive Calculator - C33</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -106,7 +106,7 @@
     }
 
     /* ===== Rows ===== */
-   .row{
+    .row{
       display: grid;
       grid-template-columns: 1fr 96px;
       align-items: stretch;
@@ -115,24 +115,20 @@
       border-bottom: 1px solid #eef0f3;
     }
 
-
     .row:last-child{ border-bottom: none; }
 
     .row > div:first-child{
       display: flex;
-      align-items: center;   /* ✅ vertical centering of label */
+      align-items: center;
       height: 100%;
     }
 
-    
     .row > div:last-child{
-       display: flex;
-       align-items: center;        /* ✅ centers input vertically */
-       justify-content: flex-end;
-       height: 100%;               /* ✅ take full row height */
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
     }
-
-
 
     .label{
       font-size: 15px;
@@ -789,24 +785,26 @@ function calculate() {
   const rate_v4 = 125;
   const rate_bkg = 30;
 
-  const entries = [
-    ["MNP Activation", mnp349, rate_mnp, mnp349 * rate_mnp],
-    ["New SIM Activation", sim349, rate_sim, sim349 * rate_sim],
-    ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home],
-    ["V4 Device (₹799)", jbV4, rate_v4, jbV4 * rate_v4],
-    ["Booking", bkg, rate_bkg, bkg * rate_bkg]
-  ];
-
   let lapTotal = 0;
   let shown = 0;
 
-  for (const [label, count, rate, amount] of entries) {
-    if (count <= 0 || amount <= 0) continue;
-    summaryList.innerHTML += renderCard(label, count, rate, amount);
-    lapTotal += amount;
+  /* ✅ 1) MNP Activation */
+  if (mnp349 > 0) {
+    const amt = mnp349 * rate_mnp;
+    summaryList.innerHTML += renderCard("MNP Activation", mnp349, rate_mnp, amt);
+    lapTotal += amt;
     shown++;
   }
 
+  /* ✅ 2) New SIM Activation */
+  if (sim349 > 0) {
+    const amt = sim349 * rate_sim;
+    summaryList.innerHTML += renderCard("New SIM Activation", sim349, rate_sim, amt);
+    lapTotal += amt;
+    shown++;
+  }
+
+  /* ✅ 3) MNP "Sell & Win" Comm. right after New SIM */
   const sellWinRate = getSellWinRate(mnp349);
   const sellWinAmount = mnp349 * sellWinRate;
   if (mnp349 > 0 && sellWinAmount > 0) {
@@ -815,6 +813,21 @@ function calculate() {
     shown++;
   }
 
+  /* ✅ 4) Remaining items */
+  const remainingEntries = [
+    ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home],
+    ["V4 Device (₹799)", jbV4, rate_v4, jbV4 * rate_v4],
+    ["Booking", bkg, rate_bkg, bkg * rate_bkg]
+  ];
+
+  for (const [label, count, rate, amount] of remainingEntries) {
+    if (count <= 0 || amount <= 0) continue;
+    summaryList.innerHTML += renderCard(label, count, rate, amount);
+    lapTotal += amount;
+    shown++;
+  }
+
+  /* FR MNP Bonus (Monthly) - unchanged from your C32 logic */
   const frMonthlyBonus = (mnp349 >= 2) ? (3 * 10 * mnp349) : 0;
   if (mnp349 >= 2) {
     summaryList.innerHTML += renderBonusCard(
@@ -858,9 +871,3 @@ document.querySelectorAll('input[type="number"]').forEach(input => {
 
 </body>
 </html>
-
-
-
-
-
-
