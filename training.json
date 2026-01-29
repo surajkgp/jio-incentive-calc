@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": "img_001",
+      "type": "image",
+      "title": "Create Poster",
+      "url": "https://admaker.jio/",
+      "tag": "Image",
+      "thumb": "thumbs/img1.jpg"
+    },
+    {
+      "id": "vid_002",
+      "type": "video",
+      "title": "Jio X Gemini Offer",
+      "url": "https://www.youtube.com/shorts/SeargGVpM7A",
+      "tag": "Video Guide"
+    },
+    {
+      "id": "pdf_001",
+      "type": "poster",
+      "title": "Jio X Gemini Poster",
+      "url": "https://drive.google.com/uc?export=download&id=1rX54Ov2D0OD3bmdJq02EUOQml1tMobLf",
+      "tag": "Poster (PDF)",
+      "thumb": "thumbs/img2.jpg"
+    }
+  ]
+}
