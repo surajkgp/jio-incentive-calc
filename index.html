@@ -825,6 +825,17 @@ function calculate() {
     shown++;
   }
 
+    /* FR MNP Bonus (Monthly) */
+  const frMonthlyBonus = (mnp349 >= 2) ? (3 * 10 * mnp349) : 0;
+  if (mnp349 >= 2) {
+    summaryList.innerHTML += renderBonusCard(
+      "FR MNP Bonus (Monthly)",
+      `₹10 per MNP (if monthly MNP ≥ 5)`,
+      frMonthlyBonus
+    );
+    shown++;
+  }
+  
   /* ✅ 4) Remaining items */
   const remainingEntries = [
     ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home],
