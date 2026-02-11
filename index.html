@@ -700,9 +700,9 @@ function renderEmptyState() {
 }
 
 function getPartnerTier(mnpCount) {
-  if (mnpCount >= 1 && mnpCount <= 2) return { tier:"Bronze Partner", msg:"Congratulations! Bronze Partner unlocked", className:"tier-bronze", glow:"rgba(154,52,18,0.14)" };
-  if (mnpCount >= 3 && mnpCount <= 9) return { tier:"Silver Partner", msg:"Great work! Silver Partner unlocked", className:"tier-silver", glow:"rgba(51,65,85,0.12)" };
-  if (mnpCount >= 10) return { tier:"Gold Partner", msg:"Outstanding! Gold Partner unlocked", className:"tier-gold", glow:"rgba(146,64,14,0.14)" };
+  if (mnpCount >= 1 && mnpCount <= 2) return { tier:"Bronze Partner", msg:"Congratulations! Bronze Status unlocked", className:"tier-bronze", glow:"rgba(154,52,18,0.14)" };
+  if (mnpCount >= 3 && mnpCount <= 9) return { tier:"Silver Partner", msg:"Great work! Silver Status unlocked", className:"tier-silver", glow:"rgba(51,65,85,0.12)" };
+  if (mnpCount >= 10) return { tier:"Gold Partner", msg:"Outstanding! Gold Status unlocked", className:"tier-gold", glow:"rgba(146,64,14,0.14)" };
   return null;
 }
 
@@ -828,8 +828,8 @@ function calculate() {
   /* ✅ 4) Remaining items */
   const remainingEntries = [
     ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home],
-    ["V4 Device (₹799)", jbV4, rate_v4, jbV4 * rate_v4],
-    ["Booking", bkg, rate_bkg, bkg * rate_bkg]
+    ["JioBharat (V4) Sale", jbV4, rate_v4, jbV4 * rate_v4],
+    ["JioBharat Booking", bkg, rate_bkg, bkg * rate_bkg]
   ];
 
   for (const [label, count, rate, amount] of remainingEntries) {
