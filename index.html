@@ -850,16 +850,7 @@ function calculate() {
     shown++;
   }
 
-  /* FR MNP Bonus (Monthly) */
-  const frMonthlyBonus = (mnp349 >= 2) ? (3 * 10 * mnp349) : 0;
-  if (mnp349 >= 2) {
-    summaryList.innerHTML += renderBonusCard(
-      "FR MNP Bonus (Monthly)",
-      `₹10 per MNP (if monthly MNP ≥ 5)`,
-      frMonthlyBonus
-    );
-    shown++;
-  }
+
 
   if (shown === 0) summaryList.innerHTML = renderEmptyState();
 
