@@ -837,15 +837,29 @@ function calculate() {
   }
   
   /* ✅ 4) Remaining items */
-  const remainingEntries = [
-    ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home],
-    ["JioBharat (V4) Sale", jbV4, rate_v4, jbV4 * rate_v4],
-    ["JioBharat Booking", bkg, rate_bkg, bkg * rate_bkg]
-  ];
+const remainingEntries = [
+  ["JioHome Booking", jaf1111, rate_home, jaf1111 * rate_home, true],
+  ["JioBharat (V4) Sale", jbV4, rate_v4, jbV4 * rate_v4],
+  ["JioBharat Booking", bkg, rate_bkg, bkg * rate_bkg]
+];
 
-  for (const [label, count, rate, amount] of remainingEntries) {
+  for (const [label, count, rate, amount, isHome] of remainingEntries) {
     if (count <= 0 || amount <= 0) continue;
-    summaryList.innerHTML += renderCard(label, count, rate, amount);
+    if (isHome) {
+  summaryList.innerHTML += `
+    <div class="summary-card">
+      <div class="summary-left">
+        <div class="card-title">${label}</div>
+        <div class="card-sub">
+          ${count} × ₹${rate} (₹30 – OTF Instant, ₹70 – After Activation)
+        </div>
+      </div>
+      <div class="card-amount">${formatINR(amount)}</div>
+    </div>
+  `;
+} else {
+  summaryList.innerHTML += renderCard(label, count, rate, amount);
+}
     lapTotal += amount;
     shown++;
   }
