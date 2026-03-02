@@ -35,6 +35,8 @@ font-size:13px;
 color:#5f6368;
 }
 
+/* ===== INPUT ===== */
+
 .target-card{
 text-align:center;
 border:1px solid #eef0f3;
@@ -53,6 +55,15 @@ border-radius:16px;
 border:1px solid #dadce0;
 }
 
+/* ===== CTA CENTER ===== */
+
+.cta-wrapper{
+display:flex;
+justify-content:center;
+width:100%;
+margin-top:18px;
+}
+
 .btn-primary{
 width:100%;
 max-width:360px;
@@ -64,10 +75,9 @@ font-weight:900;
 color:#fff;
 background:linear-gradient(90deg,#005eff,#003bba);
 cursor:pointer;
-margin-top:14px;
 }
 
-/* ===== Cards ===== */
+/* ===== CARDS ===== */
 
 .summary-card{
 display:flex;
@@ -94,7 +104,7 @@ font-weight:900;
 color:#002d62;
 }
 
-/* ===== Sell & Win Highlight ===== */
+/* ===== SELL & WIN HIGHLIGHT ===== */
 
 .bonus-card{
 background:#ecfdf5;
@@ -110,7 +120,7 @@ color:#15803d;
 font-size:16px;
 }
 
-/* ===== Total Highlight ===== */
+/* ===== TOTAL HIGHLIGHT ===== */
 
 .total-card{
 background:linear-gradient(90deg,#005eff,#003bba);
@@ -127,7 +137,7 @@ color:#fff;
 font-size:18px;
 }
 
-/* ===== Modal ===== */
+/* ===== MODAL ===== */
 
 .overlay{
 display:none;
@@ -166,10 +176,13 @@ type="number"
 placeholder="0">
 </div>
 
+<!-- CENTERED CTA -->
+<div class="cta-wrapper">
 <button class="btn-primary"
 onclick="calculateTarget()">
 Calculate Target
 </button>
+</div>
 
 </div>
 
@@ -232,8 +245,7 @@ const baseEarn=
 
 const sellWinEarn=mnp*sellRate;
 
-const totalEarn=
-baseEarn+sellWinEarn;
+const totalEarn=baseEarn+sellWinEarn;
 
 if(totalEarn>=target){
 
@@ -243,7 +255,6 @@ sim,
 home,
 sellRate,
 sellWinEarn,
-baseEarn,
 totalEarn
 };
 }
@@ -255,7 +266,6 @@ N++;
 /* ================= UI ================= */
 
 function renderCard(title,value,sub,className=""){
-
 return `
 <div class="summary-card ${className}">
 <div>
@@ -287,8 +297,6 @@ const r=solveByRatio(target);
 
 summaryList.innerHTML="";
 
-/* Base Activities */
-
 summaryList.innerHTML+=renderCard(
 "MNP (₹349)",
 r.mnp,
@@ -307,16 +315,12 @@ r.home,
 `${r.home} × ₹100`
 );
 
-/* Sell & Win Highlight */
-
 summaryList.innerHTML+=renderCard(
 "Sell & Win Commission",
 `₹${r.sellWinEarn}`,
 `${r.mnp} × ₹${r.sellRate}`,
 "bonus-card"
 );
-
-/* Total Highlight */
 
 summaryList.innerHTML+=renderCard(
 "Total Estimated Earning",
