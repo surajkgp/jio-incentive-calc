@@ -145,7 +145,7 @@ Download as Image
 
 <script>
 
-/* PAYOUT */
+/* ================= PAYOUT ================= */
 
 const PAYOUT={
 MNP:234,
@@ -153,26 +153,36 @@ SIM:132,
 HOME:100
 };
 
-/* SELL & WIN */
+/* ================= SELL & WIN SLABS ================= */
 
 function getSellWinRate(mnp){
-if(mnp>=10) return 110;
-if(mnp>=3) return 90;
-if(mnp>=1) return 50;
+
+if(mnp === 0) return 0;
+
+if(mnp > 0 && mnp < 3)
+return 50;
+
+if(mnp > 2 && mnp < 10)
+return 90;
+
+if(mnp > 9)
+return 110;
+
 return 0;
 }
 
-/* ===== FINAL SEQUENTIAL SOLVER ===== */
+/* ================= SEQUENTIAL SOLVER ================= */
 
 function solveTargets(target){
-
-/* STEP 1 — MNP */
 
 const maxMNPEarning = target*0.8;
 
 let mnp=0, rate=0, mnpEarn=0;
+const MAX_ITER=10000;
 
-while(true){
+/* STEP 1 — MNP */
+
+while(mnp < MAX_ITER){
 
 mnp++;
 rate=getSellWinRate(mnp);
@@ -192,7 +202,7 @@ mnpEarn=earn;
 const sim=Math.ceil((target*0.2)/PAYOUT.SIM);
 const simEarn=sim*PAYOUT.SIM;
 
-/* STEP 3 — RESIDUAL FOR JIOHOME */
+/* STEP 3 — JIOHOME RESIDUAL */
 
 const remaining=
 Math.max(
@@ -205,7 +215,7 @@ const home=Math.ceil(remaining/PAYOUT.HOME);
 return{mnp,sim,home,rate};
 }
 
-/* UI */
+/* ================= UI ================= */
 
 function renderCard(t,v,s){
 return`
@@ -228,7 +238,7 @@ overlay.style.display="none";
 resultModal.style.display="none";
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 
 function calculateTarget(){
 
@@ -266,7 +276,7 @@ r.home,
 openPopup();
 }
 
-/* DOWNLOAD */
+/* ================= DOWNLOAD ================= */
 
 function downloadResultImage(){
 
@@ -284,5 +294,6 @@ link.click();
 }
 
 </script>
+
 </body>
 </html>
