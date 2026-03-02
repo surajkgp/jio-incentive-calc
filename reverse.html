@@ -12,14 +12,14 @@
 body{
 margin:0;
 font-family:Inter;
-background:#fff;
+background:#ffffff;
 color:#202124;
 }
 
 .page{
 max-width:820px;
 margin:auto;
-padding:14px 14px 90px;
+padding:16px 14px 90px;
 }
 
 .title{
@@ -35,17 +35,17 @@ font-size:13px;
 color:#5f6368;
 }
 
-/* ===== INPUT ===== */
+/* INPUT */
 
 .target-card{
 text-align:center;
 border:1px solid #eef0f3;
 border-radius:18px;
-padding:16px;
+padding:18px;
+margin-top:10px;
 }
 
 .target-input{
-margin-top:10px;
 width:220px;
 height:56px;
 font-size:32px;
@@ -55,12 +55,11 @@ border-radius:16px;
 border:1px solid #dadce0;
 }
 
-/* ===== CTA CENTER ===== */
+/* CTA CENTER */
 
 .cta-wrapper{
 display:flex;
 justify-content:center;
-width:100%;
 margin-top:18px;
 }
 
@@ -77,7 +76,7 @@ background:linear-gradient(90deg,#005eff,#003bba);
 cursor:pointer;
 }
 
-/* ===== CARDS ===== */
+/* RESULT CARDS */
 
 .summary-card{
 display:flex;
@@ -87,7 +86,7 @@ background:#f7fafc;
 border:1px solid #eef2f6;
 border-radius:14px;
 padding:12px;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
 .card-title{
@@ -95,8 +94,9 @@ font-weight:800;
 }
 
 .card-sub{
-font-size:11px;
-color:#94a3b8;
+font-size:12px;
+color:#64748b;
+margin-top:2px;
 }
 
 .card-amount{
@@ -104,40 +104,7 @@ font-weight:900;
 color:#002d62;
 }
 
-/* ===== SELL & WIN HIGHLIGHT ===== */
-
-.bonus-card{
-background:#ecfdf5;
-border:1px solid #22c55e;
-}
-
-.bonus-card .card-title{
-color:#15803d;
-}
-
-.bonus-card .card-amount{
-color:#15803d;
-font-size:16px;
-}
-
-/* ===== TOTAL HIGHLIGHT ===== */
-
-.total-card{
-background:linear-gradient(90deg,#005eff,#003bba);
-border:none;
-}
-
-.total-card .card-title,
-.total-card .card-sub,
-.total-card .card-amount{
-color:#fff;
-}
-
-.total-card .card-amount{
-font-size:18px;
-}
-
-/* ===== MODAL ===== */
+/* MODAL */
 
 .overlay{
 display:none;
@@ -156,7 +123,7 @@ width:92%;
 max-width:620px;
 background:#fff;
 border-radius:18px;
-padding:14px;
+padding:16px;
 }
 
 </style>
@@ -176,7 +143,6 @@ type="number"
 placeholder="0">
 </div>
 
-<!-- CENTERED CTA -->
 <div class="cta-wrapper">
 <button class="btn-primary"
 onclick="calculateTarget()">
@@ -191,7 +157,7 @@ onclick="closePopup()"></div>
 
 <div class="modal" id="resultModal">
 
-<h2 style="text-align:center">
+<h2 style="text-align:center;margin-bottom:12px;">
 Required Lap Targets
 </h2>
 
@@ -236,26 +202,21 @@ const mnp=Math.ceil(N*x);
 const sim=Math.ceil(N*y);
 const home=Math.ceil(N*z);
 
-const sellRate=getSellWinRate(mnp);
+const bonusRate=getSellWinRate(mnp);
 
-const baseEarn=
+const earning=
 (mnp*PAYOUT.MNP)+
 (sim*PAYOUT.SIM)+
-(home*PAYOUT.HOME);
+(home*PAYOUT.HOME)+
+(mnp*bonusRate);
 
-const sellWinEarn=mnp*sellRate;
-
-const totalEarn=baseEarn+sellWinEarn;
-
-if(totalEarn>=target){
+if(earning>=target){
 
 return{
 mnp,
 sim,
 home,
-sellRate,
-sellWinEarn,
-totalEarn
+bonusRate
 };
 }
 
@@ -265,9 +226,10 @@ N++;
 
 /* ================= UI ================= */
 
-function renderCard(title,value,sub,className=""){
+function renderCard(title,value,sub){
+
 return `
-<div class="summary-card ${className}">
+<div class="summary-card">
 <div>
 <div class="card-title">${title}</div>
 <div class="card-sub">${sub}</div>
@@ -297,11 +259,22 @@ const r=solveByRatio(target);
 
 summaryList.innerHTML="";
 
+/* MNP ACTIVATION */
+
+let mnpLine=
+`OTF – ${r.mnp} × ₹234`;
+
+if(r.bonusRate>0){
+mnpLine+=`  |  Bonus – ${r.mnp} × ₹${r.bonusRate}`;
+}
+
 summaryList.innerHTML+=renderCard(
-"MNP (₹349)",
+"MNP Activation",
 r.mnp,
-`${r.mnp} × ₹234`
+mnpLine
 );
+
+/* NEW SIM */
 
 summaryList.innerHTML+=renderCard(
 "New SIM",
@@ -309,24 +282,12 @@ r.sim,
 `${r.sim} × ₹132`
 );
 
+/* JIOHOME */
+
 summaryList.innerHTML+=renderCard(
 "JioHome Booking",
 r.home,
 `${r.home} × ₹100`
-);
-
-summaryList.innerHTML+=renderCard(
-"Sell & Win Commission",
-`₹${r.sellWinEarn}`,
-`${r.mnp} × ₹${r.sellRate}`,
-"bonus-card"
-);
-
-summaryList.innerHTML+=renderCard(
-"Total Estimated Earning",
-`₹${r.totalEarn}`,
-"Close to Target",
-"total-card"
 );
 
 openPopup();
